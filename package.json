@@ -1,0 +1,59 @@
+{
+  "name": "memory-pipe",
+  "version": "1.0.0",
+  "description": "Lightweight, local-first AI agent memory library and CLI with SQLite storage, fact extraction, semantic search, and context building",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "memory-pipe": "dist/cli/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/ --ext .ts",
+    "lint:fix": "eslint src/ --ext .ts --fix",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/cli/index.js",
+    "dev": "tsx src/cli/index.ts"
+  },
+  "keywords": [
+    "ai",
+    "memory",
+    "agent",
+    "sqlite",
+    "context",
+    "facts",
+    "search",
+    "mcp"
+  ],
+  "author": "Edgar Ortega",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EdgarOrtegaRamirez/memory-pipe"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "better-sqlite3": "^11.7.0",
+    "commander": "^12.1.0",
+    "openai": "^4.78.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.5",
+    "eslint": "^9.18.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.2"
+  }
+}
