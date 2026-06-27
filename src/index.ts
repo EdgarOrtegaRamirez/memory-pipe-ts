@@ -19,7 +19,7 @@ export class MemoryPipe {
       maxMemories: config.maxMemories || 10000,
       importanceThreshold: config.importanceThreshold ?? 0.3,
       persistenceThreshold: config.persistenceThreshold ?? 0.2,
-      openAiApiKey: config.openAiApiKey,
+      openAiApiKey: config.openAiApiKey ?? '',
     };
 
     this.storage = new StorageEngine({ dbPath: this.config.dbPath });

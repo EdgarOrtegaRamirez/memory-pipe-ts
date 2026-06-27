@@ -49,10 +49,12 @@ export class McpToolServer {
 
   private registerTools(): void {
     // Add memory tool
-    this.server.tool(
+    this.server.registerTool(
       'add_memory',
-      'Add a new memory to the knowledge base',
-      ADD_SCHEMA.shape,
+      {
+        description: 'Add a new memory to the knowledge base',
+        inputSchema: ADD_SCHEMA.shape,
+      },
       async (args: Record<string, unknown>) => {
         try {
           const memory = await this.pipe.addMemory({
@@ -89,10 +91,12 @@ export class McpToolServer {
     );
 
     // Query tool
-    this.server.tool(
+    this.server.registerTool(
       'query_memories',
-      'Search memories using natural language',
-      QUERY_SCHEMA.shape,
+      {
+        description: 'Search memories using natural language',
+        inputSchema: QUERY_SCHEMA.shape,
+      },
       async (args: Record<string, unknown>) => {
         try {
           const results = await this.pipe.queryMemories({
@@ -131,10 +135,12 @@ export class McpToolServer {
     );
 
     // Get facts tool
-    this.server.tool(
+    this.server.registerTool(
       'get_facts',
-      'Get all extracted facts from conversations',
-      FACTS_SCHEMA.shape,
+      {
+        description: 'Get all extracted facts from conversations',
+        inputSchema: FACTS_SCHEMA.shape,
+      },
       async () => {
         try {
           const facts = await this.pipe.getFacts();
@@ -168,10 +174,12 @@ export class McpToolServer {
     );
 
     // Build context tool
-    this.server.tool(
+    this.server.registerTool(
       'build_context',
-      'Build context from relevant memories for AI sessions',
-      CONTEXT_SCHEMA.shape,
+      {
+        description: 'Build context from relevant memories for AI sessions',
+        inputSchema: CONTEXT_SCHEMA.shape,
+      },
       async (args: Record<string, unknown>) => {
         try {
           const context = await this.pipe.buildContext({
