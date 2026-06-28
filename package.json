@@ -43,15 +43,17 @@
     "url": "https://github.com/EdgarOrtegaRamirez/memory-pipe"
   },
   "dependencies": {
+    "@eslint/js": "^10.0.1",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "better-sqlite3": "^12.11.1",
     "commander": "^15.0.0",
+    "typescript-eslint": "^8.62.0",
     "zod": "^4.0.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.12",
-    "@types/node": "^22.10.5",
-    "eslint": "^9.18.0",
+    "@types/node": "^26.0.1",
+    "eslint": "^10.6.0",
     "tsx": "^4.19.2",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"
