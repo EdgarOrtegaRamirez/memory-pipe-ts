@@ -42,11 +42,10 @@
     "url": "https://github.com/EdgarOrtegaRamirez/memory-pipe"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.12.3",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "better-sqlite3": "^11.7.0",
     "commander": "^12.1.0",
-    "openai": "^4.78.0",
-    "zod": "^3.24.4"
+    "zod": "^4.0.0"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.12",
