@@ -33,6 +33,12 @@ const CLEAR_SCHEMA = z.object({
   force: z.boolean().optional(),
 });
 
+type AddArgs = z.infer<typeof ADD_SCHEMA>;
+type QueryArgs = z.infer<typeof QUERY_SCHEMA>;
+type ContextArgs = z.infer<typeof CONTEXT_SCHEMA>;
+type FactsArgs = z.infer<typeof FACTS_SCHEMA>;
+type SearchArgs = z.infer<typeof SEARCH_SCHEMA>;
+
 export class McpToolServer {
   private server: McpServer;
   private pipe: MemoryPipe;
@@ -55,13 +61,13 @@ export class McpToolServer {
         description: 'Add a new memory to the knowledge base',
         inputSchema: ADD_SCHEMA.shape,
       },
-      async (args: Record<string, unknown>) => {
+      async (args: AddArgs) => {
         try {
           const memory = await this.pipe.addMemory({
             type: args.type as MemoryType,
-            content: args.content as string,
-            metadata: (args.metadata as Record<string, unknown>) || undefined,
-            conversationId: (args.conversationId as string) || undefined,
+            content: args.content,
+            metadata: args.metadata || undefined,
+            conversationId: args.conversationId || undefined,
           });
 
           return {
@@ -97,12 +103,12 @@ export class McpToolServer {
         description: 'Search memories using natural language',
         inputSchema: QUERY_SCHEMA.shape,
       },
-      async (args: Record<string, unknown>) => {
+      async (args: QueryArgs) => {
         try {
           const results = await this.pipe.queryMemories({
-            query: args.query as string,
-            maxResults: (args.maxResults as number) || 10,
-            types: (args.type as MemoryType[]) || undefined,
+            query: args.query,
+            maxResults: args.maxResults || 10,
+            types: args.type ? [args.type as MemoryType] : undefined,
           });
 
           return {
@@ -141,7 +147,7 @@ export class McpToolServer {
         description: 'Get all extracted facts from conversations',
         inputSchema: FACTS_SCHEMA.shape,
       },
-      async () => {
+      async (_args: FactsArgs) => {
         try {
           const facts = await this.pipe.getFacts();
           return {
@@ -180,11 +186,11 @@ export class McpToolServer {
         description: 'Build context from relevant memories for AI sessions',
         inputSchema: CONTEXT_SCHEMA.shape,
       },
-      async (args: Record<string, unknown>) => {
+      async (args: ContextArgs) => {
         try {
           const context = await this.pipe.buildContext({
-            query: args.query as string,
-            maxEntries: (args.maxEntries as number) || 5,
+            query: args.query,
+            maxEntries: args.maxEntries || 5,
           });
 
           return {
