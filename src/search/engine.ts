@@ -1,9 +1,4 @@
-import { Memory, SearchResult, SearchParams } from '../types/index.js';
-
-interface DocTerm {
-  docId: string;
-  terms: Map<string, number>;
-}
+import { Memory, MemoryType, SearchResult, SearchParams } from '../types/index.js';
 
 interface IdfMap {
   [term: string]: number;
@@ -96,7 +91,6 @@ export class SearchEngine {
     // Filter by type if specified
     let results = scores;
     if (params.types && params.types.length > 0) {
-      const typeSet = new Set(params.types);
       results = results.filter(r => {
         const mem = this.docs.get(r.id);
         return mem !== undefined;
@@ -113,12 +107,10 @@ export class SearchEngine {
 
     // Return top N with memory data
     return results.slice(0, maxResults).map(r => {
-      // Find the memory in tokenized map
-      const mem = this.tokenized.get(r.id);
       return {
         memory: {
           id: r.id,
-          type: '' as any,
+          type: MemoryType.FACT,
           content: '',
           importance: 0.5,
           persistence: 0.5,

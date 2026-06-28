@@ -15,7 +15,7 @@ describe('MemoryPipe Integration Tests', () => {
   });
 
   it('should extract facts from conversation automatically', async () => {
-    const memory = await pipe.addMemory({
+    await pipe.addMemory({
       type: MemoryType.CONVERSATION,
       content: 'I prefer TypeScript over JavaScript for type safety.',
       conversationId: 'conv-1',

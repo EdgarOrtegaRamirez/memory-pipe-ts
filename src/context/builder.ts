@@ -1,4 +1,4 @@
-import { Memory, ContextParams, ContextResult, MemoryType } from '../types/index.js';
+import { Memory, ContextParams, ContextResult } from '../types/index.js';
 
 export class ContextBuilder {
   build(params: ContextParams, memories: Memory[]): ContextResult {
@@ -51,22 +51,17 @@ export class ContextBuilder {
 
     if (queryTerms.length === 0) return 0.5; // default relevance
 
-    let matchScore = 0;
     let matches = 0;
 
     for (const term of queryTerms) {
       if (memoryText.includes(term)) {
-        matches++;
-        // Exact matches score higher
-        // Prefix matches get some bonus
-        matchScore += 1.0;
+        matches += 1.0;
       } else {
         // Check if term is a prefix of any word in the memory
         const words = memoryText.split(/\s+/);
         for (const word of words) {
           if (word.startsWith(term)) {
             matches += 0.5;
-            matchScore += 0.5;
             break;
           }
         }

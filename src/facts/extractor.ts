@@ -84,7 +84,7 @@ function classifyType(sentence: string): MemoryType {
   return MemoryType.FACT;
 }
 
-function calculateImportance(sentence: string, type: MemoryType): number {
+function calculateImportance(sentence: string): number {
   let importance = 0.5;
 
   // Strong indicators increase importance
@@ -161,7 +161,7 @@ export class FactExtractor {
       const fact = extractFactFromSentence(sentence);
       if (fact) {
         const type = classifyType(fact);
-        const importance = calculateImportance(fact, type);
+        const importance = calculateImportance(fact);
         const tags = detectTags(fact);
         return { fact, type, importance, tags };
       }

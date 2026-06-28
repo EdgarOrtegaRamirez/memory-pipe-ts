@@ -1,5 +1,6 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { StorageEngine } from '../../src/storage/engine.js';
+import { MemoryType } from '../../src/types/index.js';
 
 describe('StorageEngine', () => {
   let engine: StorageEngine;
@@ -23,7 +24,7 @@ describe('StorageEngine', () => {
   it('should save and retrieve a memory', () => {
     const memory = {
       id: engine.generateId(),
-      type: 'fact' as any,
+      type: MemoryType.FACT,
       content: 'Test content',
       importance: 0.8,
       persistence: 0.7,
@@ -48,7 +49,7 @@ describe('StorageEngine', () => {
   it('should get all memories', () => {
     const m1 = {
       id: engine.generateId(),
-      type: 'fact' as any,
+      type: MemoryType.FACT,
       content: 'Fact one',
       importance: 0.5,
       persistence: 0.5,
@@ -60,7 +61,7 @@ describe('StorageEngine', () => {
 
     const m2 = {
       id: engine.generateId(),
-      type: 'preference' as any,
+      type: MemoryType.PREFERENCE,
       content: 'Prefers JS',
       importance: 0.6,
       persistence: 0.4,
@@ -77,7 +78,7 @@ describe('StorageEngine', () => {
   it('should filter memories by type', () => {
     const fact1 = {
       id: engine.generateId(),
-      type: 'fact' as any,
+      type: MemoryType.FACT,
       content: 'Fact 1',
       importance: 0.5,
       persistence: 0.5,
@@ -89,7 +90,7 @@ describe('StorageEngine', () => {
 
     const pref = {
       id: engine.generateId(),
-      type: 'preference' as any,
+      type: MemoryType.PREFERENCE,
       content: 'Prefers Python',
       importance: 0.7,
       persistence: 0.6,
@@ -99,7 +100,7 @@ describe('StorageEngine', () => {
     };
     engine.saveMemory(pref);
 
-    const facts = engine.getMemoriesByType('fact');
+    const facts = engine.getMemoriesByType(MemoryType.FACT);
     expect(facts).toHaveLength(1);
     expect(facts[0].content).toBe('Fact 1');
   });
@@ -107,7 +108,7 @@ describe('StorageEngine', () => {
   it('should delete a memory', () => {
     const memory = {
       id: engine.generateId(),
-      type: 'fact' as any,
+      type: MemoryType.FACT,
       content: 'Delete me',
       importance: 0.5,
       persistence: 0.5,
@@ -125,7 +126,7 @@ describe('StorageEngine', () => {
   it('should clear all memories', () => {
     const m1 = {
       id: engine.generateId(),
-      type: 'fact' as any,
+      type: MemoryType.FACT,
       content: 'Content 1',
       importance: 0.5,
       persistence: 0.5,
@@ -137,7 +138,7 @@ describe('StorageEngine', () => {
 
     const m2 = {
       id: engine.generateId(),
-      type: 'fact' as any,
+      type: MemoryType.FACT,
       content: 'Content 2',
       importance: 0.5,
       persistence: 0.5,
@@ -155,7 +156,7 @@ describe('StorageEngine', () => {
   it('should get stats correctly', () => {
     const m1 = {
       id: engine.generateId(),
-      type: 'fact' as any,
+      type: MemoryType.FACT,
       content: 'Content 1',
       importance: 0.8,
       persistence: 0.6,

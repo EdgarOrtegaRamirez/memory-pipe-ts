@@ -24,20 +24,10 @@ const CONTEXT_SCHEMA = z.object({
 
 const FACTS_SCHEMA = z.object({});
 
-const SEARCH_SCHEMA = z.object({
-  query: z.string().min(1),
-  maxResults: z.number().int().positive().optional(),
-});
-
-const CLEAR_SCHEMA = z.object({
-  force: z.boolean().optional(),
-});
-
 type AddArgs = z.infer<typeof ADD_SCHEMA>;
 type QueryArgs = z.infer<typeof QUERY_SCHEMA>;
 type ContextArgs = z.infer<typeof CONTEXT_SCHEMA>;
 type FactsArgs = z.infer<typeof FACTS_SCHEMA>;
-type SearchArgs = z.infer<typeof SEARCH_SCHEMA>;
 
 export class McpToolServer {
   private server: McpServer;

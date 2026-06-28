@@ -1,7 +1,6 @@
 import Database from 'better-sqlite3';
 import path from 'path';
-import fs from 'fs';
-import { Memory, MemoryEntry, MemoryType, MemoryStats, MemoryPipeConfig } from '../types/index.js';
+import { Memory, MemoryType, MemoryStats, MemoryPipeConfig } from '../types/index.js';
 
 export class StorageEngine {
   private db: Database.Database;
@@ -118,7 +117,7 @@ export class StorageEngine {
     this.db.exec(`DELETE FROM memories; DELETE FROM conversations;`);
   }
 
-  getStats(config: MemoryPipeConfig): MemoryStats {
+  getStats(_config?: MemoryPipeConfig): MemoryStats {
     const total = this.db.prepare(`SELECT COUNT(*) as count FROM memories`).get() as { count: number };
     const avgImp = this.db.prepare(`SELECT AVG(importance) as avg FROM memories`).get() as { avg: number | null };
     const avgPer = this.db.prepare(`SELECT AVG(persistence) as avg FROM memories`).get() as { avg: number | null };
