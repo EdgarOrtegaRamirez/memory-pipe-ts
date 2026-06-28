@@ -2,6 +2,7 @@
   "name": "memory-pipe",
   "version": "1.0.0",
   "description": "Lightweight, local-first AI agent memory library and CLI with SQLite storage, fact extraction, semantic search, and context building",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -44,7 +45,7 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
     "better-sqlite3": "^11.7.0",
-    "commander": "^12.1.0",
+    "commander": "^15.0.0",
     "zod": "^4.0.0"
   },
   "devDependencies": {
